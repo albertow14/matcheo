@@ -1,5 +1,6 @@
 import sys
 import csv
+from datetime import datetime
 import requests
 from errors import NoFileGived, FileMustBeACSV
  
@@ -33,6 +34,9 @@ if len(fails) > 0:
     with open(fails_name, 'w') as csv_file:
         csv_writer = csv.writer(csv_file, delimiter=delimeter)
         for fail_row in fails:
+            now = datetime.now()
+            current_time = now.strftime("%D-%H:%M:%S")
+            fail_row.append(current_time)
             csv_writer.writerow(fail_row)
     
         
